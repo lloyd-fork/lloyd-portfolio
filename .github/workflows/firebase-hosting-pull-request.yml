@@ -1,0 +1,56 @@
+name: Deploy to Firebase Hosting on PR
+
+on:
+  pull_request:
+    branches:
+      - production
+
+env:
+  VITE_APP_ICON: "${{ secrets.APP_ICON }}"
+  VITE_APP_TITLE: "${{ secrets.APP_TITLE }}"
+  VITE_APP_DESCRIPTION: "${{ secrets.APP_DESCRIPTION }}"
+  VITE_APP_OG_IMAGE: "${{ secrets.APP_OG_IMAGE }}"
+  VITE_APP_THEME_PRIMARY_MAIN: "${{ secrets.APP_THEME_PRIMARY_MAIN }}"
+  VITE_APP_THEME_SECONDARY_MAIN: "${{ secrets.APP_THEME_SECONDARY_MAIN }}"
+  VITE_FIREBASE_API_KEY: "${{ secrets.FIREBASE_API_KEY }}"
+  VITE_FIREBASE_AUTH_DOMAIN: "${{ secrets.FIREBASE_AUTH_DOMAIN  }}"
+  VITE_FIREBASE_PROJECT_ID: "${{ secrets.FIREBASE_PROJECT_ID  }}"
+  VITE_FIREBASE_STORAGE_BUCKET: "${{ secrets.FIREBASE_STORAGE_BUCKET  }}"
+  VITE_FIREBASE_MSG_SDR_ID: "${{ secrets.FIREBASE_MSG_SDR_ID  }}"
+  VITE_FIREBASE_APP_ID: "${{ secrets.FIREBASE_APP_ID  }}"
+  VITE_FIREBASE_MSRMT_ID: "${{ secrets.FIREBASE_MSRMT_ID  }}"
+
+jobs:
+  build_and_preview:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [24.x]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build-storybook
+      - run: npm run build
+      - name: Deploy Storybook to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          channelId: preprod
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+          target: "storybook"
+      - name: Deploy Portfolio to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          channelId: preprod
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+          target: "portfolio"

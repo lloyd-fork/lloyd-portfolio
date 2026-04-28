@@ -34,12 +34,12 @@ storybook-static
 
 # Firebase files
 .firebase/*
-.firebaserc
+# .firebaserc
 firebase-debug.log
 firebase-debug.*.log
 
 # Personal Files
-public/portfolio_icon.svg
+# public/portfolio_icon.svg
 src/assets/images/profile_picture.jpg
 src/assets/images/portfolio_logo_light.svg
-src/assets/images/portfolio_logo_dark.svg
+# src/assets/images/portfolio_logo_dark.svg
