@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "portfolio-311bf"
+  },
+  "targets": {
+    "portfolio-311bf": {
+      "hosting": {
+        "portfolio": [
+          "portfolio-311bf"
+        ],
+        "storybook": [
+          "portfolio-311bf-sb"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
