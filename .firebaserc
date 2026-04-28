@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "lloyd-portfolio"
+  },
+  "targets": {
+    "lloyd-portfolio": {
+      "hosting": {
+        "portfolio": [
+          "lloyd-portfolio"
+        ],
+        "storybook": [
+          "lloyd-portfolio-storybook"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
