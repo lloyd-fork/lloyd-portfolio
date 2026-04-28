@@ -11,7 +11,7 @@ import {
   type AppBarProps,
 } from "@mui/material";
 import {
-  Web as WebIcon,
+  // Web as WebIcon,
   Menu as MenuIcon,
   Close as CloseIcon,
   Home as HomeIcon,
@@ -20,7 +20,7 @@ import {
   Call as CallIcon,
 } from "@mui/icons-material";
 // import portfolioLogoLightImg from "../../../assets/images/portfolio_logo_light.svg";
-// import portfolioLogoDarkImg from "../../../assets/images/portfolio_logo_dark.svg";
+import portfolioLogoDarkImg from "../../../assets/images/portfolio_logo_dark.svg";
 import {
   StyledAppBar,
   StyledToolbar,
@@ -112,12 +112,12 @@ const Component = ({
           </StyledList>
 
           <Box className="toolbar-brand">
-            <WebIcon className="toolbar-brand-icon" />
-            {/* <img
+            {/* <WebIcon className="toolbar-brand-icon" /> */}
+            <img
               className="toolbar-brand-icon"
               alt="Logo"
               src={portfolioLogoDarkImg}
-            /> */}
+            />
             <Typography
               variant="h2"
               component="div"
